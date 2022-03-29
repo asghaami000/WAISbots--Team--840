@@ -1,0 +1,142 @@
+#include <kipr/wombat.h>
+
+int x;
+
+int main()
+{
+    printf("I am going to get the rings!\n");
+   
+    // Start the robot with the middle of the tire 2 inches from the near side tape of the sample isolation box. There should be a sliver of white between the back light sensors and the tape outlining the start box.
+   
+    //move servo down in position for lifting donuts (1950 = all the way down)
+    enable_servos();
+    set_servo_position(0, 1700);
+    msleep(1500);
+   
+    // Moves bot forwards to the donut thingy
+    cmpc(0);
+    while (gmpc(0) < 1730){
+        motor(0, 46);
+        motor(3, 63);
+    }
+       
+    //Go forward to forklift under the bottom donut    
+    for (x = 0; x < 5; x++){
+        cmpc(0);
+        while (gmpc(0) > 20){
+            motor(0,3);
+            motor(3,12);
+        }
+        //set_servo_position(0, 1700-(x*10));
+    }
+    x = 0;
+   
+    //pause    
+    motor(0,10);
+    motor(3,10);
+    msleep(500);
+     
+    //Weird loop thingy that moves up arm gradually
+    int arm = 0;
+    //int lift = 800;
+    int position = 1900;
+   
+    set_servo_position(arm, position);
+    while (position > 1000){
+        position = position - 6;
+        set_servo_position(arm, position);
+        msleep(15); }
+        printf("%d",position);
+disable_servos();
+ 
+    //Pause
+    motor(0, 0);
+    motor(3, 0);
+    msleep(500);
+   
+    // moving back to middle of board lengthwise
+    cmpc(0);
+    while (gmpc(0) > -100){
+        motor(0, -57);
+        motor(3, -63); }
+   
+    while (analog(4) < 2000 && analog(5) < 2000) {
+        motor(0, -44);
+        motor(3, -65); }
+   
+    for (x = 0; x < 5; x++){
+        cmpc(0);
+        while (gmpc(0) > -750){
+            motor(0, -44);
+            motor(3, -65);
+        }
+    }
+    x = 0;
+   
+   
+    // turning
+    cmpc(0);
+    while (gmpc(0) < 700){
+        motor(0, 57*8/10);
+        motor(3, -63*8/10);
+    }
+   
+    // squaring with side bar
+    while (digital(1) != 1 || digital(0) != 1) {
+        motor(0, 45);
+        motor(3, 63);
+    }
+       
+   
+    //going forward to horizontal pipe
+    cmpc(0);
+    while (gmpc(0) < -500){
+        motor(0, -54);
+        motor(3, -63*5/10);
+    }
+   
+    cmpc(0);
+    while (gmpc(0) >  -250){
+        motor(0, -57*8/10);
+        motor(3, 63*8/10);
+    }
+   
+        cmpc(0);
+    while (gmpc(0) < 200){
+        motor(0, 54*8/10);
+        motor(3, 63*8/10);
+    }
+       
+    cmpc(0);
+    while (gmpc(0) >  -150){
+        motor(0, -57*8/10);
+        motor(3, 63*8/10);
+    }
+
+        cmpc(0);
+    while (gmpc(0) < 200){
+        motor(0, 54*8/10);
+        motor(3, 63*8/10);
+    }
+
+   
+    cmpc(0);
+    while (gmpc(0) >  -150){
+        motor(0, -57*8/10);
+        motor(3, 63*8/10);
+    }
+
+        cmpc(0);
+    while (gmpc(0) < 200){
+        motor(0, 54*8/10);
+        motor(3, 63*8/10);
+    }
+   
+        cmpc(0);
+    while (gmpc(0) < 475){
+        motor(0, 54*8/10);
+        motor(3, 63*8/10);
+    }
+
+    return 0;
+}
