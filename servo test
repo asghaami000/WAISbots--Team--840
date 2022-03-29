@@ -3,14 +3,8 @@
 int main()
 {
     enable_servos();
-    //set_servo_position(0, 300);
-    //msleep(1000);
-    int x; 
-    for(x = 150; x < 700; x =+ 6){
-        set_servo_position(0, x);
-    	msleep(15);
-    }
+    set_servo_position(0, 150);
+    msleep(1000);
     disable_servos();
     return 0;
 }
-
