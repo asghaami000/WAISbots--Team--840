@@ -1,0 +1,79 @@
+#include <kipr/wombat.h>
+
+int main()
+{
+    enable_servos();
+    
+    //Wireshark
+    set_servo_position(2,1375);
+    msleep(1000);
+    set_servo_position(1,1520);
+    msleep(500);
+    
+    //90 degree turn left
+    motor(0,75);
+    motor(3,0);
+    msleep(2700);
+    
+    //Forwards to yellow cube
+    motor(0,75);
+    motor(3,75);
+    msleep(3000);   
+    
+    //close claw
+    set_servo_position(1,520);
+    msleep(500); 
+    
+    //Move arm up
+    set_servo_position(0,1204);
+    msleep(500);
+    
+    //Backwards from yellow cube
+    motor(0,-75);
+    motor(3,-75);
+    msleep(1500); 
+    
+    //180 degree turn left
+    motor(0,75);
+    motor(3,0);
+    msleep(3000);
+    
+     //Forwards 
+    motor(0,75);
+    motor(3,75);
+    msleep(1500); 
+    
+    //Drop arm
+    set_servo_position(0,500);
+    msleep(500);
+    
+    //open claw
+    set_servo_position(1,1520);
+    msleep(500); 
+    
+    //Turn towards lowered cube
+    motor(0,0);
+    motor(3,75);
+    msleep(3200);
+    
+    // Forwards to lowered cube//
+    motor(0,75);
+    motor(3,75);
+    msleep(3500);
+    
+    //close claw
+    set_servo_position(1,520);
+    msleep(500);   
+    
+    //Turn Backwards from lowered cube
+    motor(0,-75);
+    motor(3,-75);
+    msleep(3000);
+    
+    //Turn away from lowered cube
+    motor(0,0);
+    motor(3,75);
+    msleep(3000);
+    disable_servos();
+    return 0;
+}
