@@ -1,0 +1,194 @@
+#include <kipr/wombat.h>
+
+int main()
+{
+    enable_servos();
+    set_servo_position(0,150);
+    msleep(500);
+    set_servo_position(1,1520);
+    msleep(500);
+    cmpc(3);
+     while (gmpc(3) < 1500)//goes forward out of start box, get motor position counter(gmpc) 3 represent the port number. 1500 is the time it takes to complete the task
+    {
+        motor(0,50);
+        motor(3,50);
+
+    }
+    
+    cmpc(0);//clear motor position counter(cmpc) 0 represent the port number
+    while (gmpc(0) < 900)//turn toward black line, get motor position counter(gmpc) 0 represent the port number. 900 is the time it takes to complete the task
+    {
+        motor(0,60);
+        motor(3,0);
+
+    }
+    
+     cmpc(3);
+     while (gmpc(3) < 2100)//go forward towards botgal, get motor position counter(gmpc) 3 represent the port number. 2100 is the time it takes to complete the task
+    {
+        motor(0,50);
+        motor(3,50);
+
+    }
+    ao();
+    msleep(800);
+    
+    //put arm to correct height
+    set_servo_position(0,950);
+    msleep(500);
+    ao();
+    msleep(700);
+    
+      cmpc(3);
+     while (gmpc(3) < 750)//700 //turns to get in position to get botgal, get motor position counter(gmpc) 3 represent the port number. 2100 is the time it takes to complete the task
+    {
+        motor(0,0);
+        motor(3,50);
+
+    }
+    ao();
+    msleep(800);
+    
+    cmpc(3);
+     while (gmpc(3) < 2000)//goes forward to position to grab botgal, get motor position counter(gmpc) 3 represent the port number. 2100 is the time it takes to complete the task
+    {
+        motor(0,50);
+        motor(3,50);
+
+    }
+    ao();
+    msleep(1000);
+    
+    //close claw
+    set_servo_position(1,520);
+    msleep(500);
+    
+    //pick up botgal
+    set_servo_position(0,1300);
+    msleep(500);
+    ao();
+    msleep(500);
+    
+     cmpc(3);
+     while (gmpc(3) > -1200)//turns away from buildings to go towards analysis lab, get motor position counter(gmpc) 3 represent the port number.
+    {
+        motor(0,50);
+        motor(3,-60);
+
+    }
+    
+       
+    ao();
+    msleep(1000);
+    
+    set_servo_position(0,150);
+    msleep(500);
+    
+    cmpc(3);
+     while (gmpc(3) > -1100)//turns more towards analysis lab, get motor position counter(gmpc) 3 represent the port number. 
+    {
+        motor(0,50);
+        motor(3,-60);
+
+    }
+    
+       
+    ao();
+    msleep(500);
+    
+     cmpc(3);
+     while (gmpc(3) < 1000)//goes forward towards analysis lab, get motor position counter(gmpc) 3 represent the port number. 1000 is the time it takes to complete the task
+    {
+        motor(0,50);
+        motor(3,50);
+
+    }
+    
+       
+    ao();
+    msleep(500);
+    
+    int n = 0;
+    
+    while (n < 1700) {
+        //follows to edge where analysis lab is, follow the line while the left sensor sees white
+            if (analog(0) < 900) {
+                motor(0,80);
+                motor(3,30); }
+        else {
+            motor(3,80);
+            motor(0,30); }
+        
+        n += 1;
+    }
+    ao();
+    msleep(1000);
+    
+    cmpc(0);
+    while (gmpc(0) < 700)//goes forward more to get next to analysis lab, get motor position counter(gmpc) 3 represent the port number. 1000 is the time it takes to complete the task
+    {
+     motor(0,50);
+     motor(3,50);
+
+    }
+    
+       
+    ao();
+    msleep(500);
+        
+    cmpc(3);
+    while (gmpc(3) < 900)//turns so botgal is in analysis lab, get motor position counter(gmpc) 3 represent the port number. 1200 is the time it takes to complete the task
+    {
+     motor(0,-50);
+     motor(3,50);
+
+    }
+    
+       
+    ao();
+    msleep(500);
+    
+    cmpc(0);
+    while (gmpc(0) < 600)//goes forward to get botgal in the middle of analysis lab, get motor position counter(gmpc) 3 represent the port number. 1000 is the time it takes to complete the task
+    {
+     motor(0,50);
+     motor(3,50);
+
+    }
+    
+       
+    ao();
+    msleep(500);
+    
+    set_servo_position(0,150);
+    msleep(500);
+    set_servo_position(1,1520);
+    msleep(500);
+    
+    cmpc(3);
+    while (gmpc(3) < 2600)//turns to face wireshark for next class, get motor position counter(gmpc) 3 represent the port number. 1200 is the time it takes to complete the task
+    {
+     motor(0,-50);
+     motor(3,50);
+
+    }
+    
+       
+    ao();
+    msleep(500);
+    
+    cmpc(3);
+    while (gmpc(3) > -1000)//backs up to get into wireshark position, get motor position counter(gmpc) 3 represent the port number. 1200 is the time it takes to complete the task
+    {
+     motor(0,-50);
+     motor(3,-50);
+
+    }
+    
+       
+    ao();
+    msleep(500);
+    return 0;
+}
+
+
